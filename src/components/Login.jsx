@@ -20,6 +20,7 @@ export default function Login({setisloggedin}) {
         })
       }).then(res=>res.json()).then((data) => {
         if (data.success) setisloggedin(true);
+        setisSubmit(false);
       })
     }
     catch(e){

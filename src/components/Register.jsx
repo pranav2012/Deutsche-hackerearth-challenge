@@ -23,6 +23,7 @@ export default function Register({setisloggedin}) {
         }),
       }).then(res=>res.json()).then((data) => {
         if(data.success) setisloggedin(true); 
+        setisSubmit(false);
       });
     }
     catch(e){
