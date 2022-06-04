@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { url } from '../utils/static';
 
-export default function Login({setisloggedin}) {
+export default function Login({setisloggedin, setToken}) {
 
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -19,7 +19,12 @@ export default function Login({setisloggedin}) {
           password: password
         })
       }).then(res=>res.json()).then((data) => {
-        if (data.success) setisloggedin(true);
+        if (data.success){
+          setisloggedin(true);
+          setToken(data.data.token);
+          localStorage.setItem('tkn',data.data.token);
+          localStorage.setItem('islogin',true);
+        } 
       })
     }
     catch(e){

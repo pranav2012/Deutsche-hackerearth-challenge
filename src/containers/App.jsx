@@ -13,14 +13,15 @@ import { useState } from "react";
 import ErrorPage from "../components/ErrorPage";
 
 export default function App() {
-  const [isloggedin, setisloggedin] = useState(false);
-  // const [first, setfirst] = useState(second)
+  const [isloggedin, setisloggedin] = useState(localStorage.getItem('islogin') || false);
+  const [token, setToken] = useState(localStorage.getItem('tkn') || "");
+
   return (
     <BrowserRouter>
       <Header isloggedin={isloggedin}/>
       <Routes>
-        <Route path="/" element={<Blog/>} />
-        <Route path="/login" element={isloggedin ? <Blog/> : <Login setisloggedin={setisloggedin}/>} />
+        <Route path="/" element={<Blog token={token}/>} />
+        <Route path="/login" element={isloggedin ? <Blog/> : <Login setToken={setToken} setisloggedin={setisloggedin}/>} />
         <Route path="/register" element={isloggedin ? <Blog/> : <Register setisloggedin={setisloggedin}/>} />
         <Route path="/article" element={<Article />} />
         <Route path="*" element={<ErrorPage/>} />

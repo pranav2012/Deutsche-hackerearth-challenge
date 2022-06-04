@@ -22,7 +22,10 @@ export default function Register({setisloggedin}) {
           password: password,
         }),
       }).then(res=>res.json()).then((data) => {
-        if(data.success) setisloggedin(true); 
+        if (data.success){
+          setisloggedin(true);
+          localStorage.setItem('islogin',true);
+        } 
       });
     }
     catch(e){
