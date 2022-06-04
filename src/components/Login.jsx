@@ -11,19 +11,16 @@ export default function Login({setisloggedin}) {
   useEffect(() => {
     if( !email || !password || !isSubmit) return;
     try{
-      const performLogin = async () => {
-        const req = await fetch(`${url}/pub/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: email, 
-            password: password
-          })
+      fetch(`${url}/pub/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email, 
+          password: password
         })
-        const res = await req.json();
-        if (res.success) setisloggedin(true);
-      }
-      performLogin(); 
+      }).then(res=>res.json()).then((data) => {
+        if (data.success) setisloggedin(true);
+      })
     }
     catch(e){
       console.error(e);

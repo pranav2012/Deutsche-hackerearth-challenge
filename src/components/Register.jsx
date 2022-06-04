@@ -12,21 +12,18 @@ export default function Register({setisloggedin}) {
   useEffect(() => {
     if (!email || !password || !firstName || !lastName || !isSubmit) return;
     try{
-      const performRegistration = async () => {
-        const req = await fetch(`${url}/pub/register`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password,
-          }),
-        });
-        const res = await req.json();
-        if(res.success) setisloggedin(true); 
-      };
-      performRegistration();
+      fetch(`${url}/pub/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        }),
+      }).then(res=>res.json()).then((data) => {
+        if(data.success) setisloggedin(true); 
+      });
     }
     catch(e){
       console.error(e);
