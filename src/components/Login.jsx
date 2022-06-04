@@ -20,12 +20,12 @@ export default function Login({setisloggedin}) {
         })
       }).then(res=>res.json()).then((data) => {
         if (data.success) setisloggedin(true);
-        setisSubmit(false);
       })
     }
     catch(e){
       console.error(e);
     }
+    setisSubmit(false);
   }, [email, password, isSubmit, setisloggedin])
 
   return (
@@ -77,7 +77,6 @@ export default function Login({setisloggedin}) {
           </div>
           <div>
             <button
-              type="submit"
               onClick={()=>setisSubmit(true)}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
