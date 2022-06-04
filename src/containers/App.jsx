@@ -20,8 +20,8 @@ export default function App() {
       <Header isloggedin={isloggedin}/>
       <Routes>
         <Route path="/" element={<Blog/>} />
-        <Route path="/login" element={isloggedin ? <Blog/> : <Login setisloggedin={setisloggedin}/>} />
-        <Route path="/register" element={isloggedin ? <Blog/> : <Register setisloggedin={setisloggedin}/>} />
+        <Route path="/login" element={<Login setisloggedin={setisloggedin}/>} />
+        <Route path="/register" element={<Register setisloggedin={setisloggedin}/>} />
         <Route path="/article" element={<Article />} />
         <Route path="*" element={<ErrorPage/>} />
       </Routes>

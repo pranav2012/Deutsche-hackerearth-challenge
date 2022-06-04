@@ -3,8 +3,8 @@ import { ArrowSmRightIcon } from "@heroicons/react/solid";
 import { url } from '../utils/static';
 
 export default function Register({setisloggedin}) {
-  const [email, setemail] = useState(null);
-  const [password, setpassword] = useState(null);
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
 
   useEffect(() => {
     if (!email && !password) return;

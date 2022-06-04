@@ -4,8 +4,8 @@ import { url } from '../utils/static';
 
 export default function Login({setisloggedin}) {
 
-  const [email, setemail] = useState(null);
-  const [password, setpassword] = useState(null);
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
 
   useEffect(() => {
     if( !email && !password ) return;
