@@ -14,7 +14,7 @@ import ErrorPage from "../components/ErrorPage";
 
 export default function App() {
   const [isloggedin, setisloggedin] = useState(false);
-
+  // const [first, setfirst] = useState(second)
   return (
     <BrowserRouter>
       <Header isloggedin={isloggedin}/>

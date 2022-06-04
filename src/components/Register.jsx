@@ -7,9 +7,10 @@ export default function Register({setisloggedin}) {
   const [password, setpassword] = useState("");
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
+  const [isSubmit, setisSubmit] = useState(false)
 
   useEffect(() => {
-    if (!email || !password || !firstName || !lastName) return;
+    if (!email || !password || !firstName || !lastName || !isSubmit) return;
     try{
       const performRegistration = async () => {
         const req = await fetch(`${url}/pub/register`, {
@@ -30,7 +31,7 @@ export default function Register({setisloggedin}) {
     catch(e){
       console.error(e);
     }
-  }, [email, password, firstName, lastName, setisloggedin]);
+  }, [email, password, firstName, lastName, isSubmit, setisloggedin]);
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -116,6 +117,7 @@ export default function Register({setisloggedin}) {
           <div>
             <button
               type="submit"
+              onClick={()=>setisSubmit(true)}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">

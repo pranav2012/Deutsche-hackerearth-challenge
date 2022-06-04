@@ -6,9 +6,10 @@ export default function Login({setisloggedin}) {
 
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [isSubmit, setisSubmit] = useState(false)
 
   useEffect(() => {
-    if( !email || !password ) return;
+    if( !email || !password || !isSubmit) return;
     try{
       const performLogin = async () => {
         const req = await fetch(`${url}/pub/login`, {
@@ -27,7 +28,7 @@ export default function Login({setisloggedin}) {
     catch(e){
       console.error(e);
     }
-  }, [email, password, setisloggedin])
+  }, [email, password, isSubmit, setisloggedin])
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -79,6 +80,7 @@ export default function Login({setisloggedin}) {
           <div>
             <button
               type="submit"
+              onClick={()=>setisSubmit(true)}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
