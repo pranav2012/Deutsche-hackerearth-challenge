@@ -5,23 +5,32 @@ import { url } from '../utils/static';
 export default function Register({setisloggedin}) {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
 
   useEffect(() => {
-    if (!email && !password) return;
-    const performRegistration = async () => {
-      const req = await fetch(`${url}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
-      const res = await req.json();
-      return await res.success;
-    };
-    if (performRegistration) setisloggedin(true);
-  }, [email, password, setisloggedin]);
+    if (!email || !password || !firstName || !lastName) return;
+    try{
+      const performRegistration = async () => {
+        const req = await fetch(`${url}/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+          }),
+        });
+        const res = await req.json();
+        if(res.success) setisloggedin(true); 
+      };
+      performRegistration();
+    }
+    catch(e){
+      console.error(e);
+    }
+  }, [email, password, firstName, lastName, setisloggedin]);
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -39,6 +48,38 @@ export default function Register({setisloggedin}) {
         <form className="mt-8 space-y-6" action="#" method="POST">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="first-name" className="sr-only">
+                First Name
+              </label>
+              <input
+                id="first-name"
+                name="firstname"
+                type="firstname"
+                value={firstName}
+                onChange={(e)=>setfirstName(e.target.value)}
+                autoComplete="first name"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="First Name"
+              />
+            </div>
+            <div>
+              <label htmlFor="last-name" className="sr-only">
+                First Name
+              </label>
+              <input
+                id="last-name"
+                name="lastName"
+                type="lastName"
+                value={lastName}
+                onChange={(e)=>setlastName(e.target.value)}
+                autoComplete="last name"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Last Name"
+              />
+            </div>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address

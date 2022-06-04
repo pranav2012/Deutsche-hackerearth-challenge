@@ -8,20 +8,25 @@ export default function Login({setisloggedin}) {
   const [password, setpassword] = useState("");
 
   useEffect(() => {
-    if( !email && !password ) return;
-    const performLogin = async () => {
-      const req = await fetch(`${url}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email, 
-          password: password
+    if( !email || !password ) return;
+    try{
+      const performLogin = async () => {
+        const req = await fetch(`${url}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email, 
+            password: password
+          })
         })
-      })
-      const res = await req.json();
-      return await res.success;
+        const res = await req.json();
+        if (res.success) setisloggedin(true);
+      }
+      performLogin(); 
     }
-    if(performLogin) setisloggedin(true);
+    catch(e){
+      console.error(e);
+    }
   }, [email, password, setisloggedin])
 
   return (
