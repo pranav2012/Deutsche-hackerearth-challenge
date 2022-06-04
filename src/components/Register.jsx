@@ -12,7 +12,7 @@ export default function Register({setisloggedin}) {
     if (!email || !password || !firstName || !lastName) return;
     try{
       const performRegistration = async () => {
-        const req = await fetch(`${url}/register`, {
+        const req = await fetch(`${url}/pub/register`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

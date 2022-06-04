@@ -11,7 +11,7 @@ export default function Login({setisloggedin}) {
     if( !email || !password ) return;
     try{
       const performLogin = async () => {
-        const req = await fetch(`${url}/login`, {
+        const req = await fetch(`${url}/pub/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
